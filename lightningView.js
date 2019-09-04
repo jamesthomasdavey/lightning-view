@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cleaner Lightning View
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.21
 // @description  Cleaner Lightning View
 // @author       You
 // @match        https://levelaccess.lightning.force.com/lightning/*
@@ -21,10 +21,10 @@
 
     if (tabs && tabs.length && (tabNames && tabNames.length)) {
       const keepIndexes = [];
-      tabNames.forEach((tabName, i) => {
+      tabNames.forEach((tabName, index) => {
         settings.myTabs.forEach(myTab => {
           if (tabName.textContent === myTab) {
-            keepIndexes.push(i);
+            keepIndexes.push(index);
           }
         });
       });
@@ -37,6 +37,7 @@
         });
         if (removeTab) {
           tab.style.display = 'none';
+          console.log(`"${tabnames[index]}" tab removed.`)
         }
       });
       console.log('Tabs removed.');
