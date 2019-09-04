@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         Cleaner FF
+// @name         Cleaner Lightning View
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Clean up FF.
+// @version      0.2
+// @description  Cleaner Lightning View
 // @author       You
 // @match        https://levelaccess.lightning.force.com/lightning/*
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
   const settings = {
     myTabs: ['Time Entry', 'Project Tasks'],
     removeTitle: true,
@@ -17,13 +17,13 @@
   };
   const removeTabs = () => {
     const tabs = document.querySelectorAll('one-app-nav-bar-item-root');
-    const tabTexts = document.querySelectorAll('one-app-nav-bar-item-root .slds-truncate');
+    const tabNames = document.querySelectorAll('one-app-nav-bar-item-root .slds-truncate');
 
-    if (tabs && tabs.length && (tabTexts && tabTexts.length)) {
+    if (tabs && tabs.length && (tabNames && tabNames.length)) {
       const keepIndexes = [];
-      tabTexts.forEach((tabText, i) => {
+      tabNames.forEach((tabName, i) => {
         settings.myTabs.forEach(myTab => {
-          if (tabText.textContent === myTab) {
+          if (tabName.textContent === myTab) {
             keepIndexes.push(i);
           }
         });
