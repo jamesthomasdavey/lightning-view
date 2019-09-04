@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cleaner Lightning View
 // @namespace    http://tampermonkey.net/
-// @version      0.21
+// @version      0.22
 // @description  Cleaner Lightning View
 // @author       You
 // @match        https://levelaccess.lightning.force.com/lightning/*
@@ -17,13 +17,13 @@
   };
   const removeTabs = () => {
     const tabs = document.querySelectorAll('one-app-nav-bar-item-root');
-    const tabNames = document.querySelectorAll('one-app-nav-bar-item-root .slds-truncate');
+    const tabNames = document.querySelectorAll('one-app-nav-bar-item-root .slds-truncate').map(span => span.textContent);
 
     if (tabs && tabs.length && (tabNames && tabNames.length)) {
       const keepIndexes = [];
       tabNames.forEach((tabName, index) => {
         settings.myTabs.forEach(myTab => {
-          if (tabName.textContent === myTab) {
+          if (tabName === myTab) {
             keepIndexes.push(index);
           }
         });
@@ -37,7 +37,7 @@
         });
         if (removeTab) {
           tab.style.display = 'none';
-          console.log(`"${tabnames[index]}" tab removed.`)
+          console.log(`"${tabNames[index]}" tab removed.`)
         }
       });
       console.log('Tabs removed.');
